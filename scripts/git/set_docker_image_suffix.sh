@@ -5,14 +5,14 @@ BRANCH=$1
 case $BRANCH in
 
   dev | development | desarrollo)
-    echo "-dev:latest"
+    echo "-dev"
     ;;
 
   staging | "pre" | stage )
-    echo "-pre:latest"
+    echo "-pre"
     ;;
 
   *)
-    echo "latest"
+    echo ""
     ;;
 esac

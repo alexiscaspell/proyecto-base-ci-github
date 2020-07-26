@@ -44,7 +44,20 @@ jobs:
         tag_with_ref: false
         tag_with_sha: false
         add_git_labels: true
-        tags: ${{ env.NEXT_TAG }},$(. scripts/git/set_docker_latest_tag.sh ${{steps.get_branch.outputs.branch}})
+        tags: ${{ env.NEXT_TAG }}
+        #push: ${{ startsWith(github.ref, 'refs/tags/') }}
+
+    - name: build and push to docker with latest version
+      uses: docker/build-push-action@v1
+      with:
+        image: "${{ github.repository }}-$(. scripts/git/set_docker_image_suffix.sh ${{steps.get_branch.outputs.branch}})"
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: ${{ github.repository }}
+        tag_with_ref: false
+        tag_with_sha: false
+        add_git_labels: true
+        tags: ${{ env.NEXT_TAG }}
         #push: ${{ startsWith(github.ref, 'refs/tags/') }}
 
 
