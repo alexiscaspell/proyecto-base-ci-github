@@ -43,7 +43,7 @@ jobs:
         tag_with_ref: false
         tag_with_sha: false
         add_git_labels: true
-        tags: ${{ env.NEXT_TAG }},latest
+        tags: ${{ env.NEXT_TAG }},$(. scripts/git/set_docker_latest_tag.sh ${{steps.get_branch.outputs.branch}})
         #push: ${{ startsWith(github.ref, 'refs/tags/') }}
 
 
