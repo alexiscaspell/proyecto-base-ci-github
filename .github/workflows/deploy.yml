@@ -61,10 +61,10 @@ jobs:
     - name: build and push to docker with latest version
       uses: docker/build-push-action@v1
       with:
-        image: "${{ github.repository }}$(. scripts/git/set_docker_image_suffix.sh ${{env.BRANCH}})"
+        #image: "${{ github.repository }}$(. scripts/git/set_docker_image_suffix.sh ${{env.BRANCH}})"
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        #repository: ${{ github.repository }}
+        repository: "${{ github.repository }}$(. scripts/git/set_docker_image_suffix.sh ${{env.BRANCH}})"
         tag_with_ref: false
         tag_with_sha: false
         add_git_labels: true
