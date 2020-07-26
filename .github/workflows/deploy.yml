@@ -1,4 +1,13 @@
-on: push
+on: 
+  push:
+    branches:
+      - 'master'
+      - 'dev'
+      - 'development'
+      - 'desarrollo'
+      - 'pre'
+      - 'staging'
+      - 'stage'
 name: deploy
 jobs:
   deploy:
