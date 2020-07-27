@@ -33,19 +33,6 @@ jobs:
     - name: set new tag environment variable
       run: echo ::set-env name=NEXT_TAG::$(. scripts/git/set_next_tag.sh ${{ env.LATEST_TAG}})
 
-    - name: create release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-        tag_name: "v${{ env.NEXT_TAG }}"
-        release_name: Release ${{ env.NEXT_TAG }}
-        body: |
-            "Realease v${{ env.NEXT_TAG }}"
-        draft: false
-        prerelease: false
-
     - name: set latest docker tag
       run: echo ::set-env name=LATEST_DOCKER_TAG::$(. scripts/git/set_docker_latest_by_branch.sh ${{env.BRANCH}})
 
@@ -61,6 +48,19 @@ jobs:
         tags: ${{ env.NEXT_TAG }},${{env.LATEST_DOCKER_TAG}}
         #push: ${{ startsWith(github.ref, 'refs/tags/') }}
         # push: ${{ steps.get_branch.outputs.branch!='master'}}
+
+    - name: create release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: "v${{ env.NEXT_TAG }}"
+        release_name: Release ${{ env.NEXT_TAG }}
+        body: |
+            "Realease v${{ env.NEXT_TAG }}"
+        draft: false
+        prerelease: false
 
 
 
