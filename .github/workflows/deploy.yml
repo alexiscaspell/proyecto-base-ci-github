@@ -61,7 +61,7 @@ jobs:
     - name: build and push to docker with latest version
       uses: docker/build-push-action@v1
       env:
-          LATEST_TAG: "$(. scripts/git/set_docker_latest_by_branch.sh ${{env.BRANCH}})"
+          LATEST_TAG: "echo $(. scripts/git/set_docker_latest_by_branch.sh ${{env.BRANCH}})"
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
