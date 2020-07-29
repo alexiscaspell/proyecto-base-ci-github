@@ -1,6 +1,5 @@
 on: 
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - 'master'
       - 'dev'
@@ -12,7 +11,6 @@ on:
 name: deploy
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true
     name: deploy to cluster
     runs-on: ubuntu-latest
     steps:
