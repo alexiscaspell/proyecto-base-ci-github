@@ -27,26 +27,26 @@ do
 
 done
 
- if ((BRANCH=='master'))
-  then
-	     v_part3=0
-        v_part2=0
-        v_part1=$(($v_part1+1))
-  fi
+case $BRANCH in
 
- if ((BRANCH=='pre'))
-  then
-	     v_part3=0
-        v_part1=0
-        v_part2=$(($v_part2+1))
-  fi
+  dev | development | desarrollo)
+    v_part2=0
+    v_part1=0
+    v_part3=$(($v_part3+1))
+    ;;
 
- if ((BRANCH=='desarrollo'))
-  then
-	     v_part2=0
-        v_part1=0
-        v_part3=$(($v_part3+1))
-  fi
+  staging | "pre" | stage )
+    v_part3=0
+    v_part1=0
+    v_part2=$(($v_part2+1))
+    ;;
+
+  *)
+    v_part3=0
+    v_part2=0
+    v_part1=$(($v_part1+1))
+    ;;
+esac
 
 NEXT_TAG="$v_part1.$v_part2.$v_part3"
 
