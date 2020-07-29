@@ -31,10 +31,10 @@ jobs:
       run: echo ::set-env name=LATEST_TAG::$(./scripts/git/get_actual_tag.sh)
         
     - name: set new tag environment variable
-      run: echo ::set-env name=NEXT_TAG::$(. scripts/git/set_next_tag.sh ${{ env.LATEST_TAG}})
+      run: echo ::set-env name=NEXT_TAG::$(. scripts/git/set_next_tag_by_branch.sh ${{ env.LATEST_TAG}} ${{ env.BRANCH}})
 
     - name: set latest docker tag
-      run: echo ::set-env name=LATEST_DOCKER_TAG::$(. scripts/git/set_docker_latest_by_branch.sh ${{env.BRANCH}})
+      run: echo ::set-env name=LATEST_DOCKER_TAG::$(. scripts/docker/set_docker_latest_by_branch.sh ${{env.BRANCH}})
 
     - name: build and push to docker
       uses: docker/build-push-action@v1

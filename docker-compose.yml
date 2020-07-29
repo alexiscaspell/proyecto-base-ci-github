@@ -2,4 +2,4 @@ version: "3.7"
 
 services:
     base:
-        build: .
+        image: alexiscaspell/proyecto-base-ci-github:latest
