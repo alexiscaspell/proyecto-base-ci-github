@@ -1,5 +1,7 @@
-on: 
-  tag:
+on:
+  create:
+    tags:
+      - v*
     branches:
       - 'master'
       - 'dev'
